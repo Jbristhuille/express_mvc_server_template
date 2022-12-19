@@ -8,6 +8,7 @@
     * Imports
     * Name: getAll
     * Name: getById
+    * Name: getByLogin
     * Name: create
 */
 
@@ -67,6 +68,37 @@ const getById = (id) => {
 /***/
 
 /*
+* Name: getByLogin
+* Description: Get one user by login data (email and password) in database
+*
+* Args:
+* - email (String): User's email
+* - passwd (String): User's password
+*
+* Return (Object): User's data
+*/
+const getByLogin = (email, passwd) => {
+    return new Promise((resolve, reject) => {
+        db.query('SELECT * FROM users WHERE email=? AND passwd=?', [email, passwd]).then(([[user]]) => {
+            if (user) return resolve(user);
+            else {
+                return reject({
+                    message: "User Not Found",
+                    code: 404
+                });
+            }
+        }).catch((err) => {
+            console.error(err);
+            return reject({
+                message: "Internal Server Error",
+                code: 500
+            });
+        });
+    });
+}
+/***/
+
+/*
 * Name: create
 * Description: Create new user
 *
@@ -95,6 +127,7 @@ const create = (email, passwd) => {
 module.exports = {
     getAll,
     getById,
+    getByLogin,
     create
 }
 

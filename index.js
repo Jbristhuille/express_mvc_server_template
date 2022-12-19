@@ -25,7 +25,9 @@ app.use(cors());
 
 /* Routes */
 const usersRouter = require('./routers/users.router');
+const authRouter = require('./routers/auth.router');
 app.use('/users', usersRouter);
+app.use('/auth', authRouter);
 /***/
 
 /* Start server */
