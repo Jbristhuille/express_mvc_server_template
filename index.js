@@ -26,8 +26,10 @@ app.use(cors());
 /* Routes */
 const usersRouter = require('./routers/users.router');
 const authRouter = require('./routers/auth.router');
+const gifsRouter = require('./routers/gifs.router');
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/gifs', gifsRouter);
 /***/
 
 /* Start server */
